@@ -6,14 +6,17 @@ import Homepage from './pages/homepage/homepage.component'
 import ShopPage from './pages/shop/shop.component'
 import Header from './components/header/header.component'
 import SignInAndSignUpPage from './pages/sign-in and sign-up/sign-in and sign-up.compoenent';
-import {auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { onAuthStateChanged } from 'firebase/auth';
+import { Redirect } from 'react-router-dom';
+import { auth } from './firebase/firebase.utils';
 class App extends React.Component  {
   
   constructor() {
     super();
 
     this.state =  {
-      currentUser : null
+      currentUser : null,
+      isSignedin : false,
     }
   
   }
@@ -21,39 +24,24 @@ class App extends React.Component  {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    this.unsubscribeFromAuth =  auth.onAuthStateChanged( async userAuth =>{
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot=>{
-          this.setState({
-            currentUser : {
-              id:snapShot.id,
-              ...snapShot.data()
-            }
-          })
-        }, );
-
-        console.log(this.state);
-      
+    this.unsubscribeFromAuth = onAuthStateChanged(auth, (user)=>{
+      if (user) {
+        this.setState({isSignedin : true, currentUser : user});
       }
-      else
-        this.setState({currentUser : userAuth})
-      // console.log(user);
+      else {
+        this.setState({isSignedin : false, currentUser : null});
+      }
     })
 
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
   render() {return (
     <div>
-      <Header currentUser= {this.state.currentUser}/>
+      <Header currentUser= {this.state.isSignedin}/>
       <Switch>
-      <Route exact path = '/' component = {Homepage} />
-      <Route exact path = '/shop' component = {ShopPage} />
-      <Route exact patht = '/signin' component= {SignInAndSignUpPage}></Route>
+      <Route exact path = '/' >{this.state.isSignedin?<Homepage/>:<Redirect to="/signin"/>}</Route>
+      <Route exact path = '/shop' >{this.state.isSignedin?<ShopPage/>:<Redirect to="/signin"/>}</Route>
+      <Route exact patht = '/signin' >{!this.state.isSignedin?<SignInAndSignUpPage/>:<Redirect to="/"/>}</Route>
       </Switch>
     </div>
   );
