@@ -27,6 +27,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .cart-dropdown button {
