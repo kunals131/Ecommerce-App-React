@@ -36,13 +36,17 @@ const Header = ({ currentUser, hidden }) => (
       )}
       <CartIcon />
     </div>
-    {hidden ? null : <CartDropdown />}
+    {
+      !hidden&&<CartDropdown/>
+    }
   </div>
 );
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
-});
+const mapStateToProps = (state)=>{
+  return {
+    currentUser : state.user.currentUser,
+    hidden : state.cart.hidden
+  }
+}
 
 export default connect(mapStateToProps)(Header);
