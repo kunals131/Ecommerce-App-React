@@ -2,8 +2,7 @@ import React from 'react';
 
 import FormInput from '../form-input/form-input.components'
 import CustomButton from '../custom-button/custom-button.component'
-import {auth, createUserProfileDocument} from '../../firebase/firebase.utils'
-
+import {createUser, AddUserToDataBase} from '../../firebase/firebase.utils'
 
 import './sign-up.styles.scss';
 
@@ -19,28 +18,32 @@ class SignUp extends React.Component{
         }
     }
 
+
     handleSubmit = async event =>{
         event.preventDefault();
-
+        let user = null;
         const {displayName, email,password,confirmPassword} = this.state;
-
         if (password!==confirmPassword) {
-            alert('passwords dont match')
+            alert('Password dont match!')
             return;
         }
         try {
-            const {user} = await auth.createUserWithEmailAndPassword(email,password);
-            createUserProfileDocument(user,{displayName});
-            this.setState({
-                displayName : '',
-                email : '',
-                password : '',
-                confirmPassword : ''
-            })
-        } catch(error){
-            console.log(error);
+            const res = await createUser(email,password);
+             user = res.user;
         }
+        catch(err) {
+            console.log('Failed Creating Account!' + err.message);
+            return;
+        }
+        try {
+            AddUserToDataBase({displayName, email,id : user.uid}, user.uid);
+        }
+        catch(err){
+            console.log('Error adding User to database' + err.message);
+        }
+        this.setState({displayName : '', email: '', password : '', confirmPassword : ''})
     }
+
 
     handleChange = event=>{
         const {name,value} = event.target;
