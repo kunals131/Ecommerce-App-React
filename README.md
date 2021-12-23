@@ -1,3 +1,3 @@
-<h1>⚡E-Commerce</h1>
+<h1 align="center">⚡E-Commerce</h1>
 
-<p>Ongoing...</p>
+<p align="center">Ongoing...</p>
