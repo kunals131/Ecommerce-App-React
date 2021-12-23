@@ -19,8 +19,9 @@ const CollectionOverview = ({collections}) => {
     )
 }
 const mapStateToProps = (state)=>{
+    let collections  =  Object.values(state.shop.collections)
     return {
-        collections : state.shop.collections
+        collections
     }
 }
 
