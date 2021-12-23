@@ -21,13 +21,9 @@ const CollectionPage = ({match, collections}) => {
 
 
 const mapStateToProps = (state, ownProps)=>{
-    let collectionName = ownProps.match.params.category_id
-
-    const res = state.shop.collections.filter(el=>el.title.toLowerCase()===collectionName.toLowerCase());
-    console.log(res);
 
     return {
-        collections : res[0],
+        collections : state.shop.collections[ownProps.match.params.category_id]
     }
 }
 
