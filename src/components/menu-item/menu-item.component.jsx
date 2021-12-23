@@ -5,7 +5,7 @@
     const MenuItem = (props)=>{
         return(
         <div className={`${props.size} menu-item`}
-            onClick = {()=>props.history.push(`${props.match.url}${props.linkUrl}`)}
+            onClick = {()=>props.history.push(props.linkUrl)}
         >
             <div  style={{
             background: `url(${props.img}) center center/cover no-repeat`

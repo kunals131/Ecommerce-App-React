@@ -1,38 +1,38 @@
 const INITIAL_STATE={
     sections: [
         {
-            title : 'Headphones',
+            title : 'hats',
             img : 'https://i.ibb.co/cvpntL1/hats.png',
             id : 1,
-            linkUrl : 'headphones'
+            linkUrl : 'shop/hats'
             
 
         },
         {
-            title : 'Speakers',
+            title : 'jackets',
             img : 'https://i.ibb.co/px2tCc3/jackets.png',
             id : 2,
-            linkUrl : ''
+            linkUrl : 'shop/jackets'
         },
         {
-            title : 'Phone Covers',
+            title : 'sneakers',
             img : 'https://i.ibb.co/0jqHpnp/sneakers.png',
             id : 3,
-            linkUrl : ''
+            linkUrl : 'shop/sneakers'
         },
         {
-            title : 'Accessories',
+            title : 'womens',
             size : 'large',
             img : 'https://i.ibb.co/GCCdy8t/womens.png',
             id : 4,
-            linkUrl : '',
+            linkUrl : 'shop/womens',
         },
         {
             title : 'Smart Watches',
             size : 'large',
             img : 'https://i.ibb.co/R70vBrQ/men.png',
             id : 5,
-            linkUrl : ''
+            linkUrl : 'shop/mens'
         },
     
     ]
