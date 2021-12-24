@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { getFirestore, doc,setDoc } from "firebase/firestore";
+import { getFirestore, doc,setDoc, addDoc, collection, getDocs } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDeT4uJC_DI82BUqnOyoWqG4F2bd8tgFlE",
   authDomain: "ecommerce-core-fa831.firebaseapp.com",
@@ -37,4 +37,27 @@ export const logoutUser =(email,password)=>{
 
 export const signInWithGoogle = ()=>{
 
+}
+
+const addItem= async (collectionKey, data)=>{
+  await addDoc(collection(db,collectionKey), data)
+}
+
+
+
+export const getListOfCollections = async ()=>{
+  const querySnapShot = await getDocs(collection(db,"collections"));
+  let TransformedObjects = {};
+  console.log(querySnapShot);
+  querySnapShot.forEach((doc)=>{
+
+    const obj =doc.data();
+    TransformedObjects[obj.title.toLowerCase()] = {
+      ...obj,
+      routeName : encodeURI(obj.title.toLowerCase()),
+      id  : doc.id,
+    }
+  })
+  console.log(TransformedObjects);
+  return TransformedObjects;
 }
