@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component'
 import './cart-dropdown.styles.scss';
-import { toggleCartHidden } from '../../redux/cart/cart.action';
 import { withRouter } from 'react-router-dom';
 const CartDropdown = ({cartItems, history, ...props})=>
 {

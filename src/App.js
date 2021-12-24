@@ -16,10 +16,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 const App = (props)=>{
 
 
-  let unsubscribeFromAuth = null
 
+  
   useEffect(()=>{
-    unsubscribeFromAuth = onAuthStateChanged(auth, (user)=>{
+    onAuthStateChanged(auth, (user)=>{
       if (user) {
         props.setCurrentUser(user);
       }
@@ -27,6 +27,7 @@ const App = (props)=>{
         props.setCurrentUser(null)
       }
     })
+    //eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
     return (
       <div>

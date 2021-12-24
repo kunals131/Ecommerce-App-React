@@ -21,7 +21,6 @@ export const AddUserToDataBase = async(user, userId)=>{
 
 export const createUser =async (email,password)=>{
   const res = await createUserWithEmailAndPassword(auth,email,password);
-  const user = res.user;
   return res;
 
 }
