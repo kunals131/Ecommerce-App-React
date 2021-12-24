@@ -9,12 +9,15 @@ import { updateCollections } from '../../redux/shop/shop.action';
 
 const ShopPage = ({updateCollections, match})=> {
 
+        
+
         useEffect(()=>{
                const getData = async ()=>{
                        let collections = await getListOfCollections();
                        updateCollections(collections);
 
                }
+               getData();
         }, [])
 
 

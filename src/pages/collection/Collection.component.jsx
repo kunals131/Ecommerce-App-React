@@ -23,7 +23,7 @@ const CollectionPage = ({match, collections}) => {
 const mapStateToProps = (state, ownProps)=>{
 
     return {
-        collections : state.shop.collections[ownProps.match.params.category_id]
+        collections : state.shop.collections?state.shop.collections[ownProps.match.params.category_id]:[]
     }
 }
 
