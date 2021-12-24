@@ -12,7 +12,7 @@ import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.components";
 import CartDropdown from "../cartDropdown/cart-dropdown.component";
-
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink } from "./header.styles";
 const Header = ({ currentUser, hidden }) => {
 
   const [cart, setCart] =useState(false);
@@ -24,32 +24,32 @@ const Header = ({ currentUser, hidden }) => {
   }
 
 return (
-  <div className="header">
-    <Link to="/" className="logo-container">
+  <HeaderContainer>
+    <LogoContainer to="/">
       <Logo className="Logo"></Logo>
-    </Link>
-    <div className="options">
-      <Link className="option" to="/shop">
+    </LogoContainer>
+    <OptionsContainer>
+      <OptionLink className="option" to="/shop">
         SHOP
-      </Link>
-      <Link className="option" to="/shop">
+      </OptionLink>
+      <OptionLink className="option" to="/shop">
         CONTACT
-      </Link>
+      </OptionLink>
       {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
+        <OptionLink as='div' className="option" onClick={() => auth.signOut()}>
           SIGN OUT
-        </div>
+        </OptionLink>
       ) : (
-        <Link to="/signin" className="option">
+        <OptionLink to="/signin" className="option">
           SIGN IN
-        </Link>
+        </OptionLink>
       )}
       <CartIcon handleSetCart={handleSetCart} />
-    </div>
+    </OptionsContainer>
     {
       (cart)?<CartDropdown  handleSetCart={handleSetCart}/>:null
     }
-  </div>
+  </HeaderContainer>
 );
   }
 
