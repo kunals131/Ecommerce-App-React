@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 
 import "./header.styles.scss";
@@ -13,7 +13,17 @@ import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.components";
 import CartDropdown from "../cartDropdown/cart-dropdown.component";
 
-const Header = ({ currentUser, hidden }) => (
+const Header = ({ currentUser, hidden }) => {
+
+  const [cart, setCart] =useState(false);
+
+  const handleSetCart = ()=>{
+    setCart((prevState)=>{
+      setCart(!prevState);
+    })
+  }
+
+return (
   <div className="header">
     <Link to="/" className="logo-container">
       <Logo className="Logo"></Logo>
@@ -34,18 +44,19 @@ const Header = ({ currentUser, hidden }) => (
           SIGN IN
         </Link>
       )}
-      <CartIcon />
+      <CartIcon handleSetCart={handleSetCart} />
     </div>
     {
-      !hidden&&<CartDropdown/>
+      (cart)?<CartDropdown  handleSetCart={handleSetCart}/>:null
     }
   </div>
 );
+  }
 
 const mapStateToProps = (state)=>{
   return {
     currentUser : state.user.currentUser,
-    hidden : state.cart.hidden
+
   }
 }
 
