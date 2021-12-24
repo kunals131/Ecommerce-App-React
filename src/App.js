@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route, Redirect, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Checkout from './pages/checkout/Checkout.component';
@@ -13,26 +13,21 @@ import { auth } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { onAuthStateChanged } from 'firebase/auth';
 
-class App extends React.Component  {
-  
-  constructor() {
-    super();
-  }
+const App = (props)=>{
 
-  unsubscribeFromAuth = null
 
-  componentDidMount() {
-    this.unsubscribeFromAuth = onAuthStateChanged(auth, (user)=>{
+  let unsubscribeFromAuth = null
+
+  useEffect(()=>{
+    unsubscribeFromAuth = onAuthStateChanged(auth, (user)=>{
       if (user) {
-        this.props.setCurrentUser(user);
+        props.setCurrentUser(user);
       }
       else {
-        this.props.setCurrentUser(null)
+        props.setCurrentUser(null)
       }
     })
-
-  }
-  render() {
+}, [])
     return (
       <div>
         <Header />
@@ -44,7 +39,7 @@ class App extends React.Component  {
             exact
             path='/signin'
             render={() =>
-              this.props.currentUser ? (
+              props.currentUser ? (
                 <Redirect to='/' />
               ) : (
                 <SignInAndSignUpPage />
@@ -54,7 +49,7 @@ class App extends React.Component  {
         </Switch>
       </div>
     );
-  }
+  
 }
 
 const mapStateToProps = ({ user }) => ({
