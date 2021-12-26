@@ -1,21 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, lazy, Suspense} from 'react';
 import { Switch, Route, Redirect, } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Checkout from './pages/checkout/Checkout.component';
-
 import './App.css';
-
-import HomePage from './pages/homepage/homepage.component';
-import ShopPage from './pages/shop/shop.component';
-import SignInAndSignUpPage from './pages/sign-in and sign-up/sign-in and sign-up.compoenent';
 import Header from './components/header/header.component';
 import { auth } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setNotification } from './redux/notificationMessage/notification.action';
+import Spinner from './components/spinner/spinner.component';
+
+//Homepage is the main page so its not gonna matter that much
+const HomePage = lazy(()=>import('./pages/homepage/homepage.component'))
+const ShopPage = lazy(()=>import('./pages/shop/shop.component'))
+const SignInAndSignUpPage = lazy(()=>import('./pages/sign-in and sign-up/sign-in and sign-up.compoenent')) 
+const Checkout = lazy(()=>import('./pages/checkout/Checkout.component'))
 
 const App = (props)=>{
-
 
   useEffect(()=>{
     if (props.notification.message) {
@@ -46,6 +46,7 @@ const App = (props)=>{
         }
         <Header />
         <Switch>
+          <Suspense fallback={<Spinner/>}>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={Checkout} />
@@ -60,6 +61,7 @@ const App = (props)=>{
               )
             }
           />
+          </Suspense>
         </Switch>
       </div>
     );

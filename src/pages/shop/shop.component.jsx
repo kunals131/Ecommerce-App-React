@@ -1,15 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
-import CollectionOverview from "../../components/collections-overview/CollectionOverview.component";
-import CollectionPage from "../collection/Collection.component";
+
 
 import { connect } from "react-redux";
 import { fetchCollectionsFromDatabase} from "../../redux/shop/shop.action";
 import withSpinner from "../../components/with-spinner/with-spinner.component";
+import { lazy, Suspense } from "react";
+import Spinner from "../../components/spinner/spinner.component";
+
+
+const CollectionOverview = lazy(()=>import('../../components/collections-overview/CollectionOverview.component'));
+const CollectionPage = lazy(()=>import('../collection/Collection.component'));
 
 const CollectionOverViewWithSpinner = withSpinner(CollectionOverview);
 const CollectionPageWithSpinner = withSpinner(CollectionPage);
+
+
+
 
 const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections }) => {
   useEffect(() => {
@@ -19,6 +27,7 @@ const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections })
   return (
     <div className="shop-page">
       <Switch>
+        <Suspense fallback={<Spinner/>}>
         <Route
           exact
           path={`${match.path}`}
@@ -33,6 +42,7 @@ const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections })
                 <CollectionPageWithSpinner isLoading={loading || !(!!collections)} {...props} />
               )}
         ></Route>
+        </Suspense>
       </Switch>
     </div>
   );
