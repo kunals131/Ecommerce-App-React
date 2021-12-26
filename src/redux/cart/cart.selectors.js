@@ -1,22 +1,22 @@
 import {createSelector} from 'reselect';
 
-//two types of selector 1. Input selector, 2. Output selector;
-
 const selectCart = state=>state.cart;
 
-export const selectCartItems= createSelector(
-    [selectCart], (cart)=>cart.cartItem
-);
-
-export const selectCartItemsCount = createSelector(
-    [selectCart], 
-    cart=>
-    cart.cartItems.reduce((accumalatedQuantity, cartItem)=>accumalatedQuantity+cartItem.quantity,0)
+export const selectCartItems  = createSelector(
+    [selectCart],
+    cart=>cart.cartItems
 )
 
-export const selectCartTotal = createSelector(
-    [selectCart], 
-    cart=>
-    cart.cartItems.reduce((accumalatedQuantity, cartItem)=>accumalatedQuantity+cartItem.quantity*cartItem.price,0)
+export const selectCartItemsCount = createSelector(
+    [selectCartItems],
+    cartItems=>cartItems.reduce(
+        (totalQuantity,cartItem)=>totalQuantity+cartItem.quantity,0
+    )
+)
 
+export const selectCartTotalAmount = createSelector(
+    [selectCartItems],
+    cartItems=>cartItems.reduce(
+        (totalPrice,item)=>totalPrice+item.quantity*item.price,0
+    )
 )

@@ -8,6 +8,9 @@ import { fetchCollectionsFromDatabase} from "../../redux/shop/shop.action";
 import withSpinner from "../../components/with-spinner/with-spinner.component";
 import { lazy, Suspense } from "react";
 import Spinner from "../../components/spinner/spinner.component";
+import { selectLoadingState } from "../../redux/loading/loading.selector";
+import { selectCollections } from "../../redux/shop/shop.selectors";
+import { createStructuredSelector } from "reselect";
 
 
 const CollectionOverview = lazy(()=>import('../../components/collections-overview/CollectionOverview.component'));
@@ -50,9 +53,10 @@ const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections })
 
 
 
-export default connect((state)=>({
-        loading : state.loading,
-        collections : state.shop.collections
+export default connect(createStructuredSelector({
+  loading : selectLoadingState,
+  collections : selectCollections
+
 }), {
   fetchCollectionsFromDatabase
 })(ShopPage);

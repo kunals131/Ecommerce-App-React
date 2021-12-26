@@ -6,6 +6,10 @@ import Header from './components/header/header.component';
 import { auth } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { onAuthStateChanged } from 'firebase/auth';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selector';
+import { selectNotification } from './redux/notificationMessage/notification.selector';
+
 import { setNotification } from './redux/notificationMessage/notification.action';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
@@ -71,10 +75,10 @@ const App = (props)=>{
   
 }
 
-const mapStateToProps = ({ user, notification }) => ({
-  currentUser: user.currentUser,
-  notification : notification
-});
+const mapStateToProps = createStructuredSelector({
+  currentUser : selectCurrentUser,
+  notification : selectNotification
+})
 
 
 export default connect(

@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CollectionItem from '../../components/collection-item/collection-item.component'
-
 import './Collection.styles.scss'
+import { selectCollection } from '../../redux/shop/shop.selectors'
+import { createStructuredSelector } from 'reselect'
 const CollectionPage = ({match, collections}) => {
     console.log(match);
     console.log(collections);
@@ -23,7 +24,7 @@ const CollectionPage = ({match, collections}) => {
 const mapStateToProps = (state, ownProps)=>{
 
     return {
-        collections : state.shop.collections?state.shop.collections[ownProps.match.params.category_id]:[]
+        collections : selectCollection(ownProps.match.params.category_id)(state)
     }
 }
 
