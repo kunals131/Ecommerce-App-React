@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { getFirestore, doc,setDoc,  collection, getDocs } from "firebase/firestore";
+import { getFirestore, doc,setDoc,  collection, getDocs, getDoc, updateDoc } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDeT4uJC_DI82BUqnOyoWqG4F2bd8tgFlE",
   authDomain: "ecommerce-core-fa831.firebaseapp.com",
@@ -15,6 +15,7 @@ const db = getFirestore();
 export  const auth = getAuth(app);
 
 export const AddUserToDataBase = async(user, userId)=>{
+  
   await setDoc(doc(db,"users",userId), user);
   console.log('Added User')
 }
@@ -39,8 +40,21 @@ export const signInWithGoogle = ()=>{
 
 }
 
+export const fetchCartItemsFromUser = async (userId)=>{
+  const docRef = doc(db,"users", userId);
+  let getRef = await getDoc(docRef);
+  getRef = getRef.data();
+  let cart = getRef.cart;
+  return cart;
+}
 
+export const updateCart = async(userId,updatedCart)=>{
+  const docRef = doc(db,"users", userId);
+  await updateDoc(docRef, {
+    "cart" : updatedCart
+  })
 
+}
 
 
 export const getListOfCollections = async ()=>{
