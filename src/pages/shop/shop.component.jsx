@@ -3,24 +3,18 @@ import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import CollectionOverview from "../../components/collections-overview/CollectionOverview.component";
 import CollectionPage from "../collection/Collection.component";
-import { getListOfCollections } from "../../firebase/firebase.utils";
+
 import { connect } from "react-redux";
-import { updateCollections } from "../../redux/shop/shop.action";
+import { fetchCollectionsFromDatabase} from "../../redux/shop/shop.action";
 import withSpinner from "../../components/with-spinner/with-spinner.component";
 
 const CollectionOverViewWithSpinner = withSpinner(CollectionOverview);
 const CollectionPageWithSpinner = withSpinner(CollectionPage);
 
-const ShopPage = ({ updateCollections, match }) => {
-  const [loading, setLoading] = useState(true);
+const ShopPage = ({ fetchCollectionsFromDatabase, match, loading }) => {
 
   useEffect(() => {
-    const getData = async () => {
-      let collections = await getListOfCollections();
-      updateCollections(collections);
-      setLoading(false);
-    };
-    getData();
+          fetchCollectionsFromDatabase()
   }, []);
 
   return (
@@ -45,6 +39,10 @@ const ShopPage = ({ updateCollections, match }) => {
   );
 };
 
-export default connect(null, {
-  updateCollections,
+
+
+export default connect((state)=>({
+        loading : state.loading
+}), {
+  fetchCollectionsFromDatabase
 })(ShopPage);

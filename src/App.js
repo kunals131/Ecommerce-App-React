@@ -12,16 +12,26 @@ import Header from './components/header/header.component';
 import { auth } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { onAuthStateChanged } from 'firebase/auth';
+import { setNotification } from './redux/notificationMessage/notification.action';
 
 const App = (props)=>{
 
 
+  useEffect(()=>{
+    if (props.notification.message) {
+      setTimeout(()=>{
+        props.setNotification('');
+      }, 3000)
+    }
+  }, [props.notification])
 
   
   useEffect(()=>{
     onAuthStateChanged(auth, (user)=>{
       if (user) {
         props.setCurrentUser(user);
+        props.setNotification('Logged In');
+
       }
       else {
         props.setCurrentUser(null)
@@ -31,6 +41,9 @@ const App = (props)=>{
 }, [])
     return (
       <div>
+        {
+          props.notification.message&&<div>{props.notification.message}</div>
+        }
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -53,13 +66,15 @@ const App = (props)=>{
   
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({ user, notification }) => ({
+  currentUser: user.currentUser,
+  notification : notification
 });
 
 
 export default connect(
   mapStateToProps,{
-    setCurrentUser
+    setCurrentUser,
+    setNotification
   }
 )(App);
