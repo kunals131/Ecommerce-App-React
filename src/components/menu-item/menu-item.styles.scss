@@ -9,6 +9,12 @@
     border: 1px solid black;
     margin: 0 7.5px 15px;
     background-size: cover;
+    
+    @media screen and (max-width: 800px) {
+      height: 200px;
+      min-width: 50%;
+     }
+   
 
     &:hover {
       cursor: pointer;
@@ -26,6 +32,9 @@
 
     &.large {
       height: 360px;
+    @media screen and (max-width: 800px) {
+      height: 200px;
+     }
     }
 
   
@@ -36,6 +45,7 @@
     &:last-child {
       margin-left: 7.5px;
     }
+
   
     .content {
       height: 90px;

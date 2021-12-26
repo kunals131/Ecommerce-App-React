@@ -1,6 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 body {
     font-family: 'Open Sans Condensed', sans-serif;
     padding: 20px 60px;
+
+
 }
 
 a {
@@ -11,4 +18,11 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+
+@media screen and (max-width : 800px) {
+    body {
+        padding: 10px;
+    }
 }
