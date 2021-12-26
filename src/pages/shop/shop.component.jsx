@@ -11,8 +11,7 @@ import withSpinner from "../../components/with-spinner/with-spinner.component";
 const CollectionOverViewWithSpinner = withSpinner(CollectionOverview);
 const CollectionPageWithSpinner = withSpinner(CollectionPage);
 
-const ShopPage = ({ fetchCollectionsFromDatabase, match, loading }) => {
-
+const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections }) => {
   useEffect(() => {
           fetchCollectionsFromDatabase()
   }, []);
@@ -24,14 +23,14 @@ const ShopPage = ({ fetchCollectionsFromDatabase, match, loading }) => {
           exact
           path={`${match.path}`}
           render={(props) => (
-            <CollectionOverViewWithSpinner isLoading={loading} {...props} />
+            <CollectionOverViewWithSpinner isLoading={loading || !(!!collections)} {...props} />
           )}
         />
         <Route
           exact
           path={`${match.path}/:category_id`}
           render={(props) => (
-                <CollectionPageWithSpinner isLoading={loading} {...props} />
+                <CollectionPageWithSpinner isLoading={loading || !(!!collections)} {...props} />
               )}
         ></Route>
       </Switch>
@@ -42,7 +41,8 @@ const ShopPage = ({ fetchCollectionsFromDatabase, match, loading }) => {
 
 
 export default connect((state)=>({
-        loading : state.loading
+        loading : state.loading,
+        collections : state.shop.collections
 }), {
   fetchCollectionsFromDatabase
 })(ShopPage);
