@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
 
 import "./header.styles.scss";
 
@@ -12,7 +11,7 @@ import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.components";
 import CartDropdown from "../cartDropdown/cart-dropdown.component";
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink } from "./header.styles";
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from "./header.styles";
 const Header = ({ currentUser, hidden }) => {
 
   const [cart, setCart] =useState(false);

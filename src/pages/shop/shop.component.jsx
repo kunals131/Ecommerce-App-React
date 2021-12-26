@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 
 
@@ -22,7 +22,7 @@ const CollectionPageWithSpinner = withSpinner(CollectionPage);
 const ShopPage = ({ fetchCollectionsFromDatabase, match, loading, collections }) => {
   useEffect(() => {
           fetchCollectionsFromDatabase()
-  }, []);
+  }, [fetchCollectionsFromDatabase]);
 
   return (
     <div className="shop-page">

@@ -22,7 +22,7 @@ const App = (props)=>{
       setTimeout(()=>{
         props.setNotification('');
       }, 3000)
-    }
+    } // eslint-disable-next-line
   }, [props.notification])
 
   

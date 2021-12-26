@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { getFirestore, doc,setDoc, addDoc, collection, getDocs } from "firebase/firestore";
+import { getFirestore, doc,setDoc,  collection, getDocs } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDeT4uJC_DI82BUqnOyoWqG4F2bd8tgFlE",
   authDomain: "ecommerce-core-fa831.firebaseapp.com",
@@ -39,9 +39,7 @@ export const signInWithGoogle = ()=>{
 
 }
 
-const addItem= async (collectionKey, data)=>{
-  await addDoc(collection(db,collectionKey), data)
-}
+
 
 
 
