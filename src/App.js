@@ -8,7 +8,7 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setNotification } from './redux/notificationMessage/notification.action';
 import Spinner from './components/spinner/spinner.component';
-
+import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
 //Homepage is the main page so its not gonna matter that much
 const HomePage = lazy(()=>import('./pages/homepage/homepage.component'))
 const ShopPage = lazy(()=>import('./pages/shop/shop.component'))
@@ -40,12 +40,14 @@ const App = (props)=>{
     //eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
     return (
+
       <div>
         {
           props.notification.message&&<div>{props.notification.message}</div>
         }
         <Header />
         <Switch>
+          <ErrorBoundary>
           <Suspense fallback={<Spinner/>}>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
@@ -62,6 +64,7 @@ const App = (props)=>{
             }
           />
           </Suspense>
+          </ErrorBoundary>
         </Switch>
       </div>
     );
