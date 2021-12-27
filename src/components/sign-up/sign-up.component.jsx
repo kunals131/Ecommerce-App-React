@@ -3,7 +3,8 @@ import React from 'react';
 import FormInput from '../form-input/form-input.components'
 import CustomButton from '../custom-button/custom-button.component'
 import {createUser, AddUserToDataBase} from '../../firebase/firebase.utils'
-
+import { connect } from 'react-redux';
+import { setNotification } from '../../redux/notificationMessage/notification.action';
 import './sign-up.styles.scss';
 
 class SignUp extends React.Component{
@@ -24,22 +25,22 @@ class SignUp extends React.Component{
         let user = null;
         const {displayName, email,password,confirmPassword} = this.state;
         if (password!==confirmPassword) {
-            alert('Password dont match!')
+            this.props.setNotification('Please Re-check password')
             return;
         }
         try {
             const res = await createUser(email,password);
-             user = res.user;
+            user = res.user;
         }
         catch(err) {
-            console.log('Failed Creating Account!' + err.message);
+            this.props.setNotification(`Error while creating the account : ${err.message}`)
             return;
         }
         try {
             AddUserToDataBase({displayName, email,id : user.uid}, user.uid);
         }
         catch(err){
-            console.log('Error adding User to database' + err.message);
+            this.props.setNotification(`Error while creating the account : ${err.message}`)
         }
         this.setState({displayName : '', email: '', password : '', confirmPassword : ''})
     }
@@ -95,4 +96,6 @@ class SignUp extends React.Component{
     }
 }
 
-export default SignUp
+export default connect(null, {
+    setNotification
+})(SignUp)

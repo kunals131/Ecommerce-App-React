@@ -5,9 +5,11 @@ import './sign-in.styles.scss'
 import FormInput from '../form-input/form-input.components';
 import CustomButton from '../custom-button/custom-button.component';
 import { loginUser, signInWithGoogle } from '../../firebase/firebase.utils';
+import { setNotification } from '../../redux/notificationMessage/notification.action';
+import { connect } from 'react-redux';
 
 
-const SignIn = ()=>{
+const SignIn = (props)=>{
     const [form,setForm] = useState({email : '', password : ''});
 
 
@@ -21,6 +23,7 @@ const SignIn = ()=>{
         }
         catch(e){
             console.log("Error logging In : " + e.message );
+            props.setNotification(e.message);
         }
 
     }
@@ -38,6 +41,7 @@ const SignIn = ()=>{
         console.log(res.user);
         }catch(err) {
             console.log('Error Signing In With Google!' + err);
+            props.setNotification(err.message);
         }
     }
 
@@ -69,4 +73,7 @@ const SignIn = ()=>{
     
 }
 
-export default SignIn;
+
+export default connect(null, {
+    setNotification
+})(SignIn);
