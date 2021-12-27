@@ -28,7 +28,7 @@ const INITIAL_STATE={
             linkUrl : 'shop/womens',
         },
         {
-            title : 'Smart Watches',
+            title : 'Mens',
             size : 'large',
             img : 'https://i.ibb.co/R70vBrQ/men.png',
             id : 5,
