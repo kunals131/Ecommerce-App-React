@@ -35,3 +35,33 @@
     }
   }
   
+.no-item{
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+
+  &-heading {
+    font-size: 1.7rem;
+    width: 80%;
+    margin: auto;
+    @media screen and(max-width: 800px) {
+      font-size: 1.2rem;
+    }
+  }
+  &-img {
+    height: 300px;
+    
+    margin-top: 4rem;
+    width: 300px;
+    background: url('https://i.imgur.com/QIxIKBH.png') center center/cover;
+    @media screen and(max-width: 800px) {
+      width: 250px;
+      height: 250px;
+    }
+  }
+
+}
