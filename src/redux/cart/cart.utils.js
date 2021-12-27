@@ -46,7 +46,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
 
 
 export const deleteItem = (cartItems, cartItemToRemove)=>{
-  let updatedCart = cartItems.filter((item)=>item.id!=cartItemToRemove.id);
+  let updatedCart = cartItems.filter((item)=>item.id!==cartItemToRemove.id);
   if (auth.currentUser) { 
     updateCart(auth.currentUser.uid, updatedCart);
     }

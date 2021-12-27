@@ -8,6 +8,7 @@ const Notification = (props) => {
         setTimeout(()=>{
             props.unsetNotification();
         }, 2000)
+        // eslint-disable-next-line
     }, [])
 
     return (

@@ -10,9 +10,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import Notification from './notification/notification.component';
-import { selectNotification, selectNotificationMessages } from './redux/notificationMessage/notification.selector';
+import { selectNotificationMessages } from './redux/notificationMessage/notification.selector';
 
-import { setNotification, unsetNotification } from './redux/notificationMessage/notification.action';
+import { setNotification } from './redux/notificationMessage/notification.action';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
 //Homepage is the main page so its not gonna matter that much
