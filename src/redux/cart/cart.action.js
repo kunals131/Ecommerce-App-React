@@ -7,10 +7,13 @@ export const toggleCartHidden = (status)=>({
     payload : status
 })
 
-export const addItem = item=>({
-    type : CartActionTypes.ADD_ITEM,
-    payload : item
-})
+export const addItem = item=>{
+    return (dispatch)=>{
+        dispatch({type : CartActionTypes.ADD_ITEM, payload : item})
+        dispatch({type : notificationActionTypes.SET_NOTIFICATION, payload : `${item.name} has been added to your cart`})
+
+    }
+}
 
 export const clearItemFromCart = item=>({
     type : CartActionTypes.CLEAR_ITEM_FROM_CART,

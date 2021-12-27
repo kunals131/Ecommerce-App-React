@@ -6,3 +6,8 @@ export const setNotification = (message)=>{
         payload : message
     }
 }
+export const unsetNotification = ()=>{
+    return {
+        type :notificationTypes.UNSET_NOTIFICATION
+    }
+}

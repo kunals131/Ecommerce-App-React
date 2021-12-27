@@ -26,3 +26,18 @@ a {
         padding: 10px;
     }
 }
+
+.notificationContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    overflow-y: scroll;
+    right: 10px;
+    top: 20vh;
+    z-index: 1;
+}
+
+.notificationContainer::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}

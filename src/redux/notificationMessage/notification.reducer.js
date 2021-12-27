@@ -1,7 +1,7 @@
 import notificationTypes from "./notification.types"
-
+import { popElementOfArray } from "./notification.utils"
 const InitialState={
-    message : ''
+    messages : []
 }
 
 const notificationReducer = (state=InitialState, action)=>{
@@ -9,7 +9,10 @@ const notificationReducer = (state=InitialState, action)=>{
     switch(action.type) {
         case notificationTypes.SET_NOTIFICATION : 
         return {
-            message : action.payload
+            messages : [action.payload,...state.messages]
+        }
+        case notificationTypes.UNSET_NOTIFICATION : return {
+            messages : popElementOfArray(state.messages)
         }
         default : return state;
     }

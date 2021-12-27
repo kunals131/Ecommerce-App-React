@@ -9,9 +9,10 @@ import { fillCart, emptyCart } from './redux/cart/cart.action';
 import { onAuthStateChanged } from 'firebase/auth';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
-import { selectNotification } from './redux/notificationMessage/notification.selector';
+import Notification from './notification/notification.component';
+import { selectNotification, selectNotificationMessages } from './redux/notificationMessage/notification.selector';
 
-import { setNotification } from './redux/notificationMessage/notification.action';
+import { setNotification, unsetNotification } from './redux/notificationMessage/notification.action';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
 //Homepage is the main page so its not gonna matter that much
@@ -22,15 +23,7 @@ const Checkout = lazy(()=>import('./pages/checkout/Checkout.component'))
 
 const App = (props)=>{
 
-  useEffect(()=>{
-    if (props.notification.message) {
-      setTimeout(()=>{
-        props.setNotification('');
-      }, 3000)
-    } // eslint-disable-next-line
-  }, [props.notification])
 
-  
   useEffect(()=>{
     onAuthStateChanged(auth, (user)=>{
       if (user) {
@@ -53,10 +46,15 @@ const App = (props)=>{
     return (
 
       <div>
-        {
-          props.notification.message&&<div>{props.notification.message}</div>
-        }
+
         <Header />
+        {
+          props.messages.length>0&&<div className='notificationContainer'>
+           {props.messages.map((message)=>(
+             <Notification content={message}/>
+           ))}
+          </div>
+        }
         <Switch>
           <ErrorBoundary>
           <Suspense fallback={<Spinner/>}>
@@ -84,7 +82,7 @@ const App = (props)=>{
 
 const mapStateToProps = createStructuredSelector({
   currentUser : selectCurrentUser,
-  notification : selectNotification
+  messages : selectNotificationMessages
 })
 
 
