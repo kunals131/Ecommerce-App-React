@@ -42,3 +42,9 @@ export const fillCart = ()=>{
         }
     }
 }
+
+export const emptyCart = ()=>{
+    return {
+        type:  CartActionTypes.EMPTY_CART
+    }
+}

@@ -3,8 +3,9 @@ import { Switch, Route, Redirect, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 import Header from './components/header/header.component';
-import { auth } from './firebase/firebase.utils';
+import { auth, fetchCartItemsFromUser } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
+import { fillCart, emptyCart } from './redux/cart/cart.action';
 import { onAuthStateChanged } from 'firebase/auth';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
@@ -35,10 +36,16 @@ const App = (props)=>{
       if (user) {
         props.setCurrentUser(user);
         props.setNotification('Logged In');
-
+        console.log(auth);
+        const fetchAndAddCart = async()=>{
+          const cartItems = await fetchCartItemsFromUser(user.uid);
+          props.fillCart(cartItems);
+        }
+        fetchAndAddCart();
       }
       else {
         props.setCurrentUser(null)
+        props.emptyCart();
       }
     })
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,6 +91,8 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
   mapStateToProps,{
     setCurrentUser,
-    setNotification
+    setNotification,
+    fillCart,
+    emptyCart
   }
 )(App);
