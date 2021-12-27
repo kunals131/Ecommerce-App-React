@@ -11,11 +11,15 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
+    if (auth.currentUser) { 
     updateCart(auth.currentUser.uid, updatedCart);
+    }
     return updatedCart;
   }
   let updatedCart = [...cartItems, { ...cartItemToAdd, quantity: 1 }];
-  updateCart(auth.currentUser.uid, updatedCart);
+  if (auth.currentUser) { 
+    updateCart(auth.currentUser.uid, updatedCart);
+    }
   return updatedCart;
 
 };
@@ -34,13 +38,17 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
       : cartItem
   );
-  updateCart(auth.currentUser.uid, updatedCart);
+  if (auth.currentUser) { 
+    updateCart(auth.currentUser.uid, updatedCart);
+    }
   return updatedCart;
 };
 
 
 export const deleteItem = (cartItems, cartItemToRemove)=>{
   let updatedCart = cartItems.filter((item)=>item.id!=cartItemToRemove.id);
-  updateCart(auth.currentUser.uid, updatedCart);
+  if (auth.currentUser) { 
+    updateCart(auth.currentUser.uid, updatedCart);
+    }
   return updatedCart;
 }
