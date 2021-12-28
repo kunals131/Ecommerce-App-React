@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import Notification from './notification/notification.component';
 import { selectNotificationMessages } from './redux/notificationMessage/notification.selector';
-
+import PageNotFound from './pages/pagenotfound/PageNotFound';
 import { setNotification } from './redux/notificationMessage/notification.action';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
@@ -55,9 +55,10 @@ const App = (props)=>{
            ))}
           </div>
         }
-        <Switch>
+     
           <ErrorBoundary>
           <Suspense fallback={<Spinner/>}>
+          <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={Checkout} />
@@ -72,9 +73,11 @@ const App = (props)=>{
               )
             }
           />
+          <Route path="*" component={PageNotFound}/>
+          </Switch>
           </Suspense>
           </ErrorBoundary>
-        </Switch>
+   
       </div>
     );
   

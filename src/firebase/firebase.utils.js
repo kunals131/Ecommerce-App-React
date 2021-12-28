@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { getFirestore, doc,setDoc,  collection, getDocs, getDoc, updateDoc } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDeT4uJC_DI82BUqnOyoWqG4F2bd8tgFlE",
@@ -11,6 +11,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+const provider = new GoogleAuthProvider();
 
 export  const auth = getAuth(app);
 
@@ -36,13 +37,27 @@ export const logoutUser =(email,password)=>{
 
 }
 
-export const signInWithGoogle = ()=>{
-
+export const signInWithGoogle = async ()=>{
+  let res = await signInWithPopup(auth,provider);
+  res = res.user;
+  let docRef = doc(db,"users", res.uid);
+  let getRef = await getDoc(docRef);
+  if (!(getRef.exists())) {
+    let user = {
+      displayName : res.displayName,
+      id : res.uid,
+      email : res.email,
+      cart : []
+    };
+    await AddUserToDataBase(user,res.uid);
+  }
+  return res;
 }
 
 export const fetchCartItemsFromUser = async (userId)=>{
   const docRef = doc(db,"users", userId);
   let getRef = await getDoc(docRef);
+  if (!(await getRef.exists())) return [];
   getRef = getRef.data();
   let cart = getRef.cart;
   return cart;

@@ -28,11 +28,11 @@ return (
       <Logo className="Logo"></Logo>
     </LogoContainer>
     <OptionsContainer>
-      <OptionLink className="option" to="/shop">
-        SHOP
+      <OptionLink className="option" to="/">
+        HOME
       </OptionLink>
       <OptionLink className="option" to="/shop">
-        CONTACT
+        SHOP
       </OptionLink>
       {currentUser ? (
         <OptionLink as='div' className="option" onClick={() => auth.signOut()}>
