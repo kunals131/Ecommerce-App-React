@@ -42,7 +42,7 @@
         
         .price {
             color: rgb(63, 63, 63);
-            margin-top: 6rem;
+            margin-top: 5rem;
             font-size: 1rem;
             @media screen and (max-width:800px) {
                 margin-top: 2rem;
@@ -70,10 +70,15 @@
             background-color: white;
             border: 1px solid rgb(94, 93, 93);
             transition: all 0.3s ease-in-out;
+            a {
+                font-size: 1rem;
+            }
             cursor: pointer;
             &:hover {
                 background: black;
+                a{
                 color: white;
+                }
             }
         }
     }
