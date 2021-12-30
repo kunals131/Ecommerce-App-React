@@ -1,12 +1,23 @@
-<h1 align="center">👑 Crown Clothing </h1>
-<p align="center">Website : <a href="https://crown-commerce.herokuapp.com/">clothing-commerce.heroku</a></p>
+<h1 align="center">⌚ TIMEPIECE- Quality Watches </h1>
+<p align="center">↗️ Live Site : <a href="https://timepiece-live.herokuapp.com/">timepiece-live.heroku</a></p>
 
 
-![image](https://user-images.githubusercontent.com/86314140/147629781-9b5a6e4a-3572-41ef-b275-5e0e9594dd37.png)
+![banner](https://user-images.githubusercontent.com/86314140/147776027-a1d67878-690a-4051-ba60-24a75eb0ab41.png)
 
-<h1 align="center">Tech Involved</h1>
 
-<div align="center">
+<h1> Key Highlights </h1>
+<ul>
+  <li>Developed a Full stack E-Commerce Web Application with <b>React (Redux, Thunk, Saga ) & Firebase</b>.</li>
+  <li>Used <b>Redux</b> for overall State Management and <b>Styled Components</b> to design overall responsive UI.</li>
+  <li>Implemented Performance Optimizations with <b>React Lazy, Redux Reselect</b> and also configured it to be a <b> Progressive Web App</b>.</li>
+  <li>Integrated Stripe's Payment gateway, and also added animations and transitions using <b>Framer Motion</b>.</li>
+  
+</ul>
+
+
+<h1>Tech Involved</h1>
+
+<div>
   
 ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
 ![HTML](https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5)&nbsp;
@@ -22,4 +33,5 @@
 ![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)&nbsp;
   
 </div>
+
 
