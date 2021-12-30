@@ -39,53 +39,13 @@
                 width:100%;
             }
         }
-        .buttons {
-            display: flex;
-            justify-content: flex-start;
-
-            margin-top: 4.5rem;
-            @media screen and (max-width:800px) {
-                margin-top: 3rem;
-                justify-content: center;
-            }
-      
-            .button-1 {
-                height: 28px;
-                opacity: 0.2;
-                width: 28px;
-                transition: 0.3s all ease;
-                cursor: pointer;
-                &:hover {
-                    opacity: 1;
-                    border: 2px solid black;
-                }
-                border-radius: 14px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: white;
-                border: 1px solid grey;
-                &-inside {
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 10px;
-                    
-                }
-            }
-            .selected {
-                opacity: 1;
-                border: 2px solid black;
-            }
-            .second {
-                margin-left: 1rem;
-            }
-        }
+        
         .price {
             color: rgb(63, 63, 63);
-            margin-top: 0.9rem;
+            margin-top: 6rem;
             font-size: 1rem;
             @media screen and (max-width:800px) {
-            
+                margin-top: 2rem;
                 text-align: center;
          
             }
