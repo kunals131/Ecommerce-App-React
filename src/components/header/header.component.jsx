@@ -1,8 +1,9 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 
 import "./header.styles.scss";
 
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from "../../assets/watch.svg";
 
 import "./header.styles.scss";
 
@@ -11,7 +12,7 @@ import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.components";
 import CartDropdown from "../cartDropdown/cart-dropdown.component";
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from "./header.styles";
+
 const Header = ({ currentUser, hidden }) => {
 
   const [cart, setCart] =useState(false);
@@ -23,32 +24,32 @@ const Header = ({ currentUser, hidden }) => {
   }
 
 return (
-  <HeaderContainer>
-    <LogoContainer to="/">
+  <div className="header">
+    <Link to="/" className="logo-container">
       <Logo className="Logo"></Logo>
-    </LogoContainer>
-    <OptionsContainer>
-      <OptionLink className="option" to="/">
-        HOME
-      </OptionLink>
-      <OptionLink className="option" to="/shop">
+    </Link>
+    <div className="options">
+      <Link className="option" to="/shop">
         SHOP
-      </OptionLink>
+      </Link>
+      <Link className="option" to="/shop">
+        CONTACT
+      </Link>
       {currentUser ? (
-        <OptionLink as='div' className="option" onClick={() => auth.signOut()}>
+        <div className="option loginLink" onClick={() => auth.signOut()}>
           SIGN OUT
-        </OptionLink>
+        </div>
       ) : (
-        <OptionLink to="/signin" className="option">
+        <Link to="/signin" className="option loginLink">
           SIGN IN
-        </OptionLink>
+        </Link>
       )}
       <CartIcon handleSetCart={handleSetCart} />
-    </OptionsContainer>
+    </div>
     {
       (cart)?<CartDropdown  handleSetCart={handleSetCart}/>:null
     }
-  </HeaderContainer>
+  </div>
 );
   }
 

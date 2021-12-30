@@ -8,6 +8,8 @@ import { selectSections } from '../../redux/directory/directory.selector';
 const Directory= ({sections})=> {
 
         return(
+            <>
+            <div className="directory-heading">Categories</div>
             <div className="directory-menu">
                 {
                     sections.map((section)=>(
@@ -15,6 +17,7 @@ const Directory= ({sections})=> {
                     ))
                 }
             </div>
+            </>
         )
     
 }

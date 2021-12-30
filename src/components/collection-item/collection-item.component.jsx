@@ -10,6 +10,8 @@ import { setNotification } from '../../redux/notificationMessage/notification.ac
 import { withRouter } from 'react-router-dom';
 
 const CollectionItem = ({item,addItem, setNotification, user, ...props})=>{
+
+
     const handleAddToCart = ()=>{
         if (user) {
             addItem(item);
@@ -25,7 +27,7 @@ const CollectionItem = ({item,addItem, setNotification, user, ...props})=>{
         <div
         className='image'
         style={{
-            backgroundImage : `url(${imageUrl})`
+            backgroundImage : `url(${imageUrl[1]})`
         }}/>
     <div className="collection-footer">
         <span className="name">{name}</span>

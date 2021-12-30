@@ -51,3 +51,10 @@ padding: 10px 15px;
 font-size: 1.2rem;
 cursor: pointer;
 `
+export const OptionLink2 = styled.div`
+padding: 4px 20px;
+font-size: 1rem;
+cursor: pointer;
+color : white;
+background : black;
+`

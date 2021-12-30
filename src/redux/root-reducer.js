@@ -11,7 +11,7 @@ import loadingReducer from "./loading/loading.reducer";
 const persistConfig = {
     key : 'root',
     storage,
-    whitelist:['directory']
+    whitelist:[]
 }
 
 const rootReducer = combineReducers({
