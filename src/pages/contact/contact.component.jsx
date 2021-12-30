@@ -1,6 +1,6 @@
 import React from 'react'
 import './contact.styles.scss'
-import FormInput from '../../components/form-input/form-input.components'
+
 const ContactPage = () => {
     return (
         <div className="contact-page">
